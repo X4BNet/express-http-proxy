@@ -15,7 +15,7 @@ function buildProxyReq(Container) {
   return Promise
     .all([parseBody, createReqOptions])
     .then(function(responseArray) {
-      if(Container.user.req.method === 'GET') {
+      if(Container.user.req.method === 'GET' || !Container.user.req.headers['content-length']) {
         Container.proxy.bodyContent = responseArray[0] === true ? responseArray[0] : "";
       } else {
         Container.proxy.bodyContent = responseArray[0];
